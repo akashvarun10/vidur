@@ -5,7 +5,7 @@ const props = defineProps<{
   id: string;
   placeholder: string;
 
-  modelValue?: string;
+  modelValue?: string | null;
   inputClass?: string;
   labelClass?: string;
   typeOverride?: string;
@@ -19,7 +19,7 @@ const model = useVModel(props, "modelValue")
 
 <template>
   <fieldset>
-    <InputLabel :labelClass :label :error :id />
+    <InputLabel :label-class :label :error :id />
     <input class="input-css" :type="typeOverride || 'text'" :class="inputClass" v-model="model" :placeholder :id>
   </fieldset>
 </template>

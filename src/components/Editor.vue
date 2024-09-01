@@ -41,7 +41,7 @@ import { useVModel } from "@vueuse/core";
 import type Quill from 'quill';
 
 const props = withDefaults(defineProps<{
-  modelValue: string;
+  modelValue?: string | null;
   placeholder?: string;
   id?: string;
   readOnly?: boolean;
@@ -92,6 +92,30 @@ onUnmounted(() => {
 .ql-editor {
   padding: 0% !important;
   border: 0px !important;
+}
+
+.ql-editor {
+  @apply !text-base
+}
+
+.ql-editor > h1, h2 {
+  @apply text-zinc-600 font-noto
+}
+
+.ql-editor > h3, h4, h5, h6, ol, p, ul {
+  @apply text-zinc-700 font-lato
+}
+
+.ql-editor > h1 {
+  @apply text-2xl
+}
+
+.ql-editor > h2 {
+  @apply !text-xl
+}
+
+.ql-editor > h3 {
+  @apply !text-base
 }
 
 .ql-e-blank {

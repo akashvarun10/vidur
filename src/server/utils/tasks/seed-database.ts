@@ -1,13 +1,15 @@
 import type { NodePgDatabase } from 'drizzle-orm/node-postgres';
-import { metaDataTable } from '../db/schema';
 import { eq } from 'drizzle-orm';
-import { seeds } from '../utils/seeds';
+import { seeds } from '../seeds';
+import { metaDataTable } from '~/server/db/schema';
 
 export type SeedContext = { db: NodePgDatabase };
 export type SeedPayload = { startKey: string };
 export type SeedFn = (ctx: SeedContext, payload: SeedPayload) => Promise<void> | void;
 
-const seedDatabase = async (payload: SeedPayload) => {
+export async function seedDatabase(payload: SeedPayload) {
+  console.log('Seeding Database');
+
   const db = await useDatabase();
 
   const dbResponse = await db.select().from(metaDataTable).where(eq(metaDataTable.key, 'seedVersion'));
@@ -46,21 +48,5 @@ const seedDatabase = async (payload: SeedPayload) => {
     }
   });
 
-  return success;
-};
-
-export default defineTask<boolean>({
-  meta: {
-    name: 'seed-database',
-    description: 'This task runs when Nitro server boots up. It initialises database with default metadata',
-  },
-  async run({ payload }) {
-    const seedPayload = payload as SeedPayload;
-
-    console.log('Seeding Database');
-    const result = await seedDatabase(seedPayload);
-    return {
-      result,
-    };
-  },
-});
+  return { result: success };
+}

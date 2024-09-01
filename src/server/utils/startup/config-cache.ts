@@ -1,8 +1,7 @@
-import { createStorage } from 'unstorage';
+import { createStorage } from "unstorage";
 import memoryDriver from 'unstorage/drivers/memory';
-import { MEMORY_STORAGE_KEY } from '../utils/storage';
 
-export default defineNitroPlugin(async () => {
+export async function configureCache() {
   const storage = useStorage();
 
   const defaultCache = createStorage({
@@ -11,5 +10,5 @@ export default defineNitroPlugin(async () => {
 
   storage.mount(MEMORY_STORAGE_KEY, defaultCache);
 
-  runTask('seed-cache');
-})
+  await seedCache();
+}

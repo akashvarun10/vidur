@@ -1,7 +1,3 @@
-> ##  🚧 WIP<br>
-> ### This project is under active development and might include breaking changes.
-> See open issues to become an early contributor.
-
 <p align="center">
   <a href="https://github.com/nirvanaOSS/vidur">
    <img src="./header.png" alt="Logo">
@@ -48,7 +44,7 @@ yarn dev              # Finally, start the dev server.
 
 **Or simply use Docker**
 ```bash
-docker compose --profile dev up 
+docker compose up 
 ```
 
 This command starts the `db` and `app` services using the `dev` profile. It runs PostgreSQL as `database` and the app as `vidur_app`.
